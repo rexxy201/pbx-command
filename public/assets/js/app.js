@@ -1,3 +1,24 @@
+// ────────────── Theme toggle ──────────────
+function toggleTheme() {
+  const html  = document.documentElement;
+  const isDark = html.getAttribute('data-bs-theme') === 'dark';
+  const next  = isDark ? 'light' : 'dark';
+  html.setAttribute('data-bs-theme', next);
+  localStorage.setItem('pbx-theme', next);
+  _syncThemeIcon(next);
+}
+
+function _syncThemeIcon(theme) {
+  const icon = document.getElementById('theme-icon');
+  if (!icon) return;
+  icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+}
+
+// Sync icon on initial load
+document.addEventListener('DOMContentLoaded', function() {
+  _syncThemeIcon(document.documentElement.getAttribute('data-bs-theme') || 'dark');
+});
+
 // ────────────── Utilities ──────────────
 const BASE = (document.querySelector('meta[name="base-path"]') || {content:''}).content;
 

@@ -25,6 +25,7 @@ function render_layout(string $title, string $pageKey, callable $content, array 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="base-path" content="<?= $base ?>">
 <title><?= h($title) ?> — <?= APP_NAME ?></title>
+<script>/* Prevent theme flash — must run before any stylesheet */(function(){var t=localStorage.getItem('pbx-theme')||'dark';document.documentElement.setAttribute('data-bs-theme',t);})();</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="<?= $base ?>/assets/css/style.css">
@@ -86,6 +87,9 @@ function render_layout(string $title, string $pageKey, callable $content, array 
       <div class="d-flex align-items-center gap-3 text-muted small">
         Node: <code>NGA-Lagos-01</code>
         <span class="badge bg-primary"><?= h(ucfirst($user['role'])) ?></span>
+        <button id="theme-toggle" title="Toggle dark / light mode" onclick="toggleTheme()">
+          <i class="bi bi-sun-fill" id="theme-icon"></i>
+        </button>
       </div>
     </header>
 
